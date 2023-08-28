@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import * as data from '../api/data.json';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'pontinho-app';
+  title = 'myinvoice-app';
+  header = data;
 }

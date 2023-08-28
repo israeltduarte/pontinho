@@ -1,0 +1,18 @@
+.user-points-list {
+  float: left;
+  width: auto;
+  margin: auto;
+  text-align: center;
+}
+
+.isPlaying {
+  background-color: lightgreen;
+}
+
+.isNotPlaying {
+  background-color: lightcoral;
+}
+
+.hasExploded {
+  background-color: yellow;
+}

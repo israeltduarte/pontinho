@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div
+      class="user-points-list"
+      *ngFor="let player of players"
+      [ngClass]="player.hasExploded ? 'hasExploded' : 'isPlaying'"
+      [ngClass]="player.isPlaying ? 'isPlaying' : 'isNotPlaying'"
+    >
+      <div>
+        <div>{{ player.name }}</div>
+        <div>{{ player.isPlaying ? "Jogando" : "Eliminado" }}</div>
+        <div>{{ player.hasExploded ? "Estourou" : "Não estourou" }}</div>
+        <!-- <div *ngIf="player.hasExplodedWith">
+          <div>Estourou com: {{ player.hasExplodedWith }}</div>
+          <div>Voltou com: {{ player.isBackWith }}</div>
+        </div> -->
+        <div>Total: {{ player.total }}</div>
+        <div>Escape: {{ player.scape }}</div>
+        <div *ngFor="let point of player.points">
+          <div>{{ point }}</div>
+        </div>
+        <div class="new-point">
+          <input
+            type="number"
+            [id]="'score_' + player.id"
+            #scoreInput
+            (input)="enableSubmitButton()"
+            [disabled]="!player.isPlaying"
+          />
+        </div>
+      </div>
+    </div>
+    <button
+      class="btn btn-primary"
+      (click)="submitScores()"
+      [disabled]="!canSubmit"
+    >
+      Finalizar rodada
+    </button>
+  </div>
+</div>

@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0 auto;
+  height: auto;
+  width: 1024px;
+}
+
+nav a {
+  margin-right: 10px;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+.invoice {
+  margin-bottom: 20px;
+}
+
+.top-line,
+.bottom-line {
+  background-color: #c72525;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 40px;
+}
