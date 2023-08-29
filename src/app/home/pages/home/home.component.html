@@ -10,10 +10,10 @@
         <div>{{ player.name }}</div>
         <div>{{ player.isPlaying ? "Jogando" : "Eliminado" }}</div>
         <div>{{ player.hasExploded ? "Estourou" : "Não estourou" }}</div>
-        <!-- <div *ngIf="player.hasExplodedWith">
+        <div *ngIf="player.hasExplodedWith">
           <div>Estourou com: {{ player.hasExplodedWith }}</div>
           <div>Voltou com: {{ player.isBackWith }}</div>
-        </div> -->
+        </div>
         <div>Total: {{ player.total }}</div>
         <div>Escape: {{ player.scape }}</div>
         <div *ngFor="let point of player.points">
