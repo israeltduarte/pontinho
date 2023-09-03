@@ -9,18 +9,19 @@ import data from '../../../../api/data.json';
 })
 export class HomeComponent {
   players!: Player[];
-  roundNumber!: number;
   round!: Map<string, number>;
   canSubmit!: boolean;
   highestTotal!: number;
-  roundWinner!: Player;
 
   ngOnInit() {
     this.players = data.players;
-    this.roundNumber = 1;
     this.round = new Map<string, number>();
     this.canSubmit = false;
     this.highestTotal = 0;
+  }
+
+  restartGame() {
+    console.log('restartGame');
   }
 
   submitScores() {
@@ -35,9 +36,6 @@ export class HomeComponent {
       .filter((player) => player.isPlaying)
       .forEach((player) => {
         let score = parseInt(this.getInputValue(player.id));
-        if (score == 0) {
-          this.roundWinner = player;
-        }
         this.round.set(player.id, score);
       });
   }

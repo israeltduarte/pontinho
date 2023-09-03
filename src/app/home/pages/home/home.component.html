@@ -1,28 +1,32 @@
 <div class="container">
   <div class="row">
-    <div
-      class="user-points-list"
-      *ngFor="let player of players"
-      [ngClass]="player.hasExploded ? 'hasExploded' : 'isPlaying'"
-      [ngClass]="player.isPlaying ? 'isPlaying' : 'isNotPlaying'"
-    >
-      <div>
-        <div>{{ player.name }}</div>
-        <div>{{ player.isPlaying ? "Jogando" : "Eliminado" }}</div>
-        <div>{{ player.hasExploded ? "Estourou" : "Não estourou" }}</div>
-        <div *ngIf="player.hasExplodedWith">
-          <div>Estourou com: {{ player.hasExplodedWith }}</div>
-          <div>Voltou com: {{ player.isBackWith }}</div>
-        </div>
+    <div class="playerColumn" *ngFor="let player of players">
+      <div class="playerTitle">
+        {{ player.name }}
+      </div>
+
+      <div
+        class="playerInfo"
+        [ngClass]="
+          player.isPlaying
+            ? player.hasExploded
+              ? 'exploded'
+              : 'notExploded'
+            : 'notPlaying'
+        "
+        [ngClass]="player.hasExploded ? 'exploded' : 'playing'"
+      >
         <div>Total: {{ player.total }}</div>
         <div>Escape: {{ player.scape }}</div>
         <div *ngFor="let point of player.points">
           <div>{{ point }}</div>
         </div>
-        <div class="new-point">
+
+        <div class="playerScore">
           <input
             type="number"
             [id]="'score_' + player.id"
+            placeholder="0"
             #scoreInput
             (input)="enableSubmitButton()"
             [disabled]="!player.isPlaying"
@@ -30,12 +34,11 @@
         </div>
       </div>
     </div>
-    <button
-      class="btn btn-primary"
-      (click)="submitScores()"
-      [disabled]="!canSubmit"
-    >
-      Finalizar rodada
-    </button>
+    <div class="button">
+      <button class="endRound" (click)="submitScores()" [disabled]="!canSubmit">
+        Finalizar rodada
+      </button>
+      <button class="newGame" (click)="restartGame()">Novo Jogo</button>
+    </div>
   </div>
 </div>

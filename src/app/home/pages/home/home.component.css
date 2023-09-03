@@ -1,18 +1,65 @@
-.user-points-list {
+.container {
+  width: 1024px;
+  display: flex;
+  padding-top: 15px;
+}
+
+.row {
+}
+
+.playerColumn {
   float: left;
   width: auto;
   margin: auto;
   text-align: center;
+  align-items: center;
 }
 
-.isPlaying {
-  background-color: lightgreen;
+.playerTitle {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 2px;
+  margin-bottom: 10px;
 }
 
-.isNotPlaying {
+.playerInfo {
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.playerScore {
+  margin-top: 10px;
+}
+
+.playerScore input {
+  width: 50%;
+  height: 60px;
+  text-align: center;
+  font-size: 20px;
+  background-color: white;
+  margin-bottom: 15px;
+}
+
+.playing {
+  background-color: #a3dfa3;
+}
+.notPlaying {
   background-color: lightcoral;
 }
-
-.hasExploded {
+.exploded {
   background-color: yellow;
+}
+.notExploded {
+  background-color: yellow;
+}
+
+.button {
+  border: none;
+  width: 100%;
+}
+.endRound {
+  background-color: lightcoral;
+}
+.newGame {
+  background-color: lightblue;
 }
