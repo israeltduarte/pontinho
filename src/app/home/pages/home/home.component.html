@@ -14,7 +14,6 @@
               : 'notExploded'
             : 'notPlaying'
         "
-        [ngClass]="player.hasExploded ? 'exploded' : 'playing'"
       >
         <div>Total: {{ player.total }}</div>
         <div>Escape: {{ player.scape }}</div>
@@ -35,10 +34,14 @@
       </div>
     </div>
     <div class="button">
-      <button class="endRound" (click)="submitScores()" [disabled]="!canSubmit">
+      <button
+        [ngClass]="canSubmit ? 'active' : 'inactive'"
+        (click)="submitScores()"
+        [disabled]="!canSubmit"
+      >
         Finalizar rodada
       </button>
-      <button class="newGame" (click)="restartGame()">Novo Jogo</button>
+      <button class="restart" (click)="restartGame()">Novo Jogo</button>
     </div>
   </div>
 </div>

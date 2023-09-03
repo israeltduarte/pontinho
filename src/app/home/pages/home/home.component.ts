@@ -9,13 +9,13 @@ import data from '../../../../api/data.json';
 })
 export class HomeComponent {
   players!: Player[];
-  round!: Map<string, number>;
+  score!: Map<string, number>;
   canSubmit!: boolean;
   highestTotal!: number;
 
   ngOnInit() {
     this.players = data.players;
-    this.round = new Map<string, number>();
+    this.score = new Map<string, number>();
     this.canSubmit = false;
     this.highestTotal = 0;
   }
@@ -26,17 +26,23 @@ export class HomeComponent {
 
   submitScores() {
     if (this.canSubmit) {
-      this.updateRoundScores();
-      this.updateScores();
+      this.updateScore();
+      this.updatePlayers();
+      this.startNewRound();
     }
   }
 
-  updateRoundScores() {
+  startNewRound() {
+    this.score = new Map<string, number>();
+    this.canSubmit = false;
+  }
+
+  updateScore() {
     this.players
       .filter((player) => player.isPlaying)
       .forEach((player) => {
         let score = parseInt(this.getInputValue(player.id));
-        this.round.set(player.id, score);
+        this.score.set(player.id, score);
       });
   }
 
@@ -47,36 +53,39 @@ export class HomeComponent {
     return inputElement ? inputElement.value : '';
   }
 
-  updateScores() {
+  updatePlayers() {
     this.players
       .filter((player) => player.isPlaying)
       .forEach((player) => {
-        this.addScore(player, this.round.get(player.id)!);
+        this.updatePoints(player);
+        this.updateTotal(player);
+        this.updateScape(player);
         this.clearNewScoreField(player);
       });
 
+    this.players
+      .filter((player) => !player.isPlaying)
+      .forEach((player) => {
+        this.fillPointsWithDash(player);
+      });
+
     this.highestTotal = this.getHighestValidTotal();
+
     this.updatePlayersThatExploded();
+    this.updatePlayersThatWereEliminated();
   }
 
-  addScore(player: Player, score: number) {
-    this.addPoints(player, score);
-    this.updateTotal(player, score);
-    this.updateScape(player);
+  updatePoints(player: Player) {
+    const newScore = this.score.get(player.id);
+    player.points.push(Number(newScore));
   }
 
-  addPoints(player: Player, newScore: number) {
-    player.points.push(newScore);
-  }
-
-  updateTotal(player: Player, newScore: number) {
-    player.total = player.total + newScore;
+  updateTotal(player: Player) {
+    player.total = player.total + Number(this.score.get(player.id));
     if (player.total > 99) {
-      if (player.hasExploded) {
-        this.eliminatePlayer(player);
-        player.isPlaying = false;
-      }
-      player.hasExploded = true;
+      !player.hasExploded
+        ? this.explodePlayer(player)
+        : this.eliminatePlayer(player);
     }
   }
 
@@ -86,34 +95,56 @@ export class HomeComponent {
     }
   }
 
-  updatePlayersThatExploded() {
-    let playingPlayers = this.players.filter((player) => player.isPlaying);
+  fillPointsWithDash(player: Player) {
+    let pointsLength = this.players.filter((player) => player.isPlaying)[0]
+      .points.length;
 
-    let explodedPlayers = this.players
-      .filter((player) => player.isPlaying)
-      .filter((player) => player.total > 99);
-
-    if (explodedPlayers.length == playingPlayers.length - 1) {
-      explodedPlayers
-        .filter((player) => player.isPlaying)
-        .forEach((player) => this.eliminatePlayer(player));
+    if (pointsLength > player.points.length) {
+      player.points.push('-');
     }
+  }
+
+  updatePlayersThatExploded() {
+    this.checkIfSomeoneWonTheGame();
 
     this.players
       .filter((player) => player.isPlaying)
       .filter((player) => player.total > 99)
-      .forEach((player) => this.explodePlayer(player));
+      .forEach((player) => this.updateExplodedPlayerInfo(player));
   }
 
-  explodePlayer(player: Player) {
+  updatePlayersThatWereEliminated() {
+    this.players
+      .filter((player) => !player.isPlaying)
+      .forEach((player) => this.eliminatePlayer(player));
+  }
+
+  checkIfSomeoneWonTheGame() {
+    const playingPlayers = this.players
+      .filter((player) => player.isPlaying)
+      .filter((player) => !player.hasExploded);
+
+    if (playingPlayers.length === 1) {
+      this.players
+        .filter((player) => player.hasExploded)
+        .forEach((player) => this.eliminatePlayer(player));
+    }
+  }
+
+  updateExplodedPlayerInfo(player: Player) {
     player.hasExplodedWith = player.total;
-    player.total = this.highestTotal;
+    player.total = this.getHighestValidTotal();
     player.isBackWith = player.total;
     this.updateScape(player);
   }
 
+  explodePlayer(player: Player) {
+    player.hasExploded = true;
+  }
+
   eliminatePlayer(player: Player) {
     player.isPlaying = false;
+    player.scape = '-';
   }
 
   getHighestValidTotal(): number {
@@ -129,7 +160,9 @@ export class HomeComponent {
       .filter((player) => player.isPlaying)
       .every((player) => {
         const inputValue = this.getInputValue(player.id);
-        return inputValue !== '' && inputValue !== null;
+        return (
+          inputValue !== '' && inputValue !== null && Number(inputValue) >= 0
+        );
       });
   }
 
