@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist/pontinho-app",
     "ignore": [
       "firebase.json",
       "**/.*",
