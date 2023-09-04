@@ -4,10 +4,13 @@
   padding-top: 15px;
 }
 
+<<<<<<< Updated upstream
 .row {
   display: flex;
 }
 
+=======
+>>>>>>> Stashed changes
 .playerColumn {
   float: left;
   width: 50%;
