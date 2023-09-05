@@ -72,3 +72,23 @@
   margin-bottom: 10px;
   padding: 5px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    float: left;
+    width: 390px;
+  }
+
+  .playerColumn {
+    width: 50%;
+  }
+
+  .playerTitle {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .playerScore input {
+    font-size: 16px;
+  }
+}
