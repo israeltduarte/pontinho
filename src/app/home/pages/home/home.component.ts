@@ -29,7 +29,7 @@ export class HomeComponent {
       player.isPlaying = true;
     });
     this.canSubmit = false;
-    this.score = new Map<string, number>();
+    this.score.clear();
     this.highestTotal = 0;
   }
 
