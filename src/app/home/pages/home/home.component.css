@@ -4,6 +4,10 @@
   padding-top: 15px;
 }
 
+.players {
+  margin: auto;
+}
+
 .playerColumn {
   float: left;
   width: 50%;
@@ -76,7 +80,7 @@
 @media (max-width: 768px) {
   .container {
     float: left;
-    width: 390px;
+    width: 415px;
   }
 
   .playerColumn {
