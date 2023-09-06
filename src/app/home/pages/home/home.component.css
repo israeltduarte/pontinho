@@ -11,9 +11,11 @@
   --infoEliminated: #e57373;
   --cardEliminated: #ffa4a2;
 
-  --finishButtonActive: #0d8bd9;
-  --finishButtonInactive: #77cff2;
-  --restartButton: red;
+  --finishButton: #0d8bd9;
+  --finishButtonActive: #086096;
+  --finishButtonInactive: #8fcee7;
+  --restartButton: #ff0000;
+  --restartButtonActive: #bd0202;
 }
 
 .container {
@@ -43,7 +45,7 @@
 
 .playerCard:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
+  transform: scale(1.04);
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -71,7 +73,6 @@
   border: 2px solid #ccc;
   border-radius: 5px;
   margin-top: 10px;
-  transition: border-color 0.3s ease-in-out;
   outline: none;
 }
 
@@ -84,30 +85,39 @@
 }
 .titleExploded {
   background-color: var(--titleExploded);
+  transition: transform 2s, background-color 2s;
 }
 .titleEliminated {
   background-color: var(--titleEliminated);
+  transition: transform 2s, background-color 2s;
 }
 .infoPlaying {
   background-color: var(--infoPlaying);
 }
 .infoExploded {
   background-color: var(--infoExploded);
+  transition: transform 2s, background-color 2s;
 }
 .infoEliminated {
   background-color: var(--infoEliminated);
+  transition: transform 2s, background-color 2s;
 }
 .cardPlaying {
   background-color: var(--cardPlaying);
 }
 .cardExploded {
   background-color: var(--cardExploded);
+  transition: transform 2s, background-color 2s;
 }
 .cardEliminated {
   background-color: var(--cardEliminated);
+  transition: transform 2s, background-color 2s;
 }
 
 .active {
+  background-color: var(--finishButton);
+}
+.active:active {
   background-color: var(--finishButtonActive);
 }
 .inactive {
@@ -115,7 +125,9 @@
 }
 .restart {
   background-color: var(--restartButton);
-  transition: transform 0.2s;
+}
+.restart:active {
+  background-color: var(--restartButtonActive);
 }
 
 button {
@@ -133,10 +145,6 @@ button {
     float: left;
     width: 420px;
     padding: 15px 0px;
-  }
-
-  .playerCard {
-    margin-bottom: 20px;
   }
 
   .playerTitle {
