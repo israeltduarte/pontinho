@@ -25,6 +25,10 @@ export class HomeComponent implements OnInit {
   }
 
   restartGame(): void {
+    if (this.modal.showModal) {
+      this.modal.toggle();
+    }
+
     this.players.forEach((player) => {
       player.points = [];
       player.total = 0;
