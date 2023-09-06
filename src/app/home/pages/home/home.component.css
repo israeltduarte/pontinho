@@ -131,7 +131,7 @@ button {
 @media (max-width: 768px) {
   .container {
     float: left;
-    width: 430px;
+    width: 420px;
     padding: 15px 0px;
   }
 
