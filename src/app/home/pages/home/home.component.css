@@ -1,16 +1,19 @@
 :host {
-  --playerTitle: #1c3d6e;
-  --playerColumn: #7fb7ff;
-  --playerPlaying: #3b6a9e;
-  --playerExploded: #ff6f61;
-  --playerEliminated: #cccccc;
-  --finishButtonActive: #1c3d6e;
-  --finishButtonInactive: #1c3d6e;
-  --restartButton: #4a90e2;
-}
+  --titlePlaying: #009688;
+  --infoPlaying: #4db6ac;
+  --cardPlaying: #80cbc4;
 
-body {
-  background-color: var(--blue);
+  --titleExploded: #917e2f;
+  --infoExploded: #bd9f2a;
+  --cardExploded: #f8e09c;
+
+  --titleEliminated: #f44336;
+  --infoEliminated: #e57373;
+  --cardEliminated: #ffa4a2;
+
+  --finishButtonActive: #0d8bd9;
+  --finishButtonInactive: #77cff2;
+  --restartButton: red;
 }
 
 .container {
@@ -30,13 +33,18 @@ body {
   width: 100%;
 }
 
-.playerColumn {
+.playerCard {
   flex: 0 1 calc(50% - 20px);
   text-align: center;
   padding: 15px;
-  border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: var(--playerColumn);
+  background-color: var(--playerCard);
+}
+
+.playerCard:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .playerTitle {
@@ -49,8 +57,6 @@ body {
 }
 
 .playerInfo {
-  border: 1px solid #ccc;
-  margin-bottom: 5px;
   padding: 10px;
   border-radius: 10px;
   color: white;
@@ -62,45 +68,45 @@ body {
   text-align: center;
   font-size: 16px;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-input[type="number"] {
-  width: 50%;
-  height: 60px;
-  text-align: center;
-  font-size: 20px;
-  background-color: #f5f5f5;
   border: 2px solid #ccc;
   border-radius: 5px;
-  outline: none;
+  margin-top: 10px;
   transition: border-color 0.3s ease-in-out;
+  outline: none;
 }
 
-input[type="number"]:focus {
-  border-color: var(--restartButton);
+.playerScore input[type="number"]:focus {
+  border-color: gray;
 }
 
-.playerColumn:hover {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+.titlePlaying {
+  background-color: var(--titlePlaying);
+}
+.titleExploded {
+  background-color: var(--titleExploded);
+}
+.titleEliminated {
+  background-color: var(--titleEliminated);
+}
+.infoPlaying {
+  background-color: var(--infoPlaying);
+}
+.infoExploded {
+  background-color: var(--infoExploded);
+}
+.infoEliminated {
+  background-color: var(--infoEliminated);
+}
+.cardPlaying {
+  background-color: var(--cardPlaying);
+}
+.cardExploded {
+  background-color: var(--cardExploded);
+}
+.cardEliminated {
+  background-color: var(--cardEliminated);
 }
 
-.playing {
-  background-color: var(--playerPlaying);
-}
-.notPlaying {
-  background-color: var(--playerEliminated);
-}
-.exploded {
-  background-color: var(--playerExploded);
-}
-.notExploded {
-  background-color: var(--playerPlaying);
-}
 .active {
   background-color: var(--finishButtonActive);
 }
@@ -111,16 +117,15 @@ input[type="number"]:focus {
   background-color: var(--restartButton);
   transition: transform 0.2s;
 }
-.restart:hover {
-  transform: scale(1.02);
-}
-.button button {
+
+button {
   width: 100%;
+  height: 40px;
   margin-bottom: 10px;
   padding: 5px;
   border-radius: 5px;
-  border: 2px solid #ccc;
   color: white;
+  border: none;
 }
 
 @media (max-width: 768px) {
@@ -130,7 +135,7 @@ input[type="number"]:focus {
     padding: 15px 0px;
   }
 
-  .playerColumn {
+  .playerCard {
     margin-bottom: 20px;
   }
 

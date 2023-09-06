@@ -1,7 +1,26 @@
 <div class="container">
   <div class="players row">
-    <div class="playerColumn" *ngFor="let player of players">
-      <div class="playerTitle">
+    <div
+      *ngFor="let player of players"
+      class="playerCard"
+      [ngClass]="
+        player.isPlaying
+          ? player.hasExploded
+            ? 'cardExploded'
+            : 'cardPlaying'
+          : 'cardEliminated'
+      "
+    >
+      <div
+        class="playerTitle"
+        [ngClass]="
+          player.isPlaying
+            ? player.hasExploded
+              ? 'titleExploded'
+              : 'titlePlaying'
+            : 'titleEliminated'
+        "
+      >
         {{ player.name }}
       </div>
 
@@ -10,9 +29,9 @@
         [ngClass]="
           player.isPlaying
             ? player.hasExploded
-              ? 'exploded'
-              : 'notExploded'
-            : 'notPlaying'
+              ? 'infoExploded'
+              : 'infoPlaying'
+            : 'infoEliminated'
         "
       >
         <div>Total: {{ player.total }}</div>
