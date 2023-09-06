@@ -1,3 +1,21 @@
+<app-modal #modal>
+  <!-- winner-modal.component.html -->
+  <div class="modal-content" [ngClass]="{ show: modal.showModal }">
+    <div class="modal-header">
+      <h2>Parabéns!</h2>
+      <p class="winner-name">{{ winner }}</p>
+    </div>
+    <div class="modal-body">
+      <p>Você é o vencedor da partida!</p>
+      <p>Gostaria de jogar novamente?</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-primary" (click)="restartGame()">Novo Jogo</button>
+      <button class="btn-secondary" (click)="modal.toggle()">Fechar</button>
+    </div>
+  </div>
+</app-modal>
+
 <div class="container">
   <div class="players row">
     <div

@@ -1,26 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { WinnerModalComponent } from 'src/app/components/winner-modal/winner-modal.component';
 import { Player } from 'src/app/core/models';
 import data from '../../../../api/data.json';
+import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   players!: Player[];
   score!: Map<string, number>;
   canSubmit!: boolean;
   highestTotal!: number;
+  winner!: String;
+  @ViewChild('modal') modal!: WinnerModalComponent;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.players = data.players;
     this.score = new Map<string, number>();
     this.canSubmit = false;
     this.highestTotal = 0;
   }
 
-  restartGame() {
+  restartGame(): void {
     this.players.forEach((player) => {
       player.points = [];
       player.total = 0;
@@ -33,7 +37,7 @@ export class HomeComponent {
     this.highestTotal = 0;
   }
 
-  submitScores() {
+  submitScores(): void {
     if (this.canSubmit) {
       this.updateScore();
       this.updatePlayers();
@@ -41,12 +45,12 @@ export class HomeComponent {
     }
   }
 
-  startNewRound() {
+  startNewRound(): void {
     this.score = new Map<string, number>();
     this.canSubmit = false;
   }
 
-  updateScore() {
+  updateScore(): void {
     this.players
       .filter((player) => player.isPlaying)
       .forEach((player) => {
@@ -62,7 +66,7 @@ export class HomeComponent {
     return inputElement ? inputElement.value : '';
   }
 
-  updatePlayers() {
+  updatePlayers(): void {
     this.players
       .filter((player) => player.isPlaying)
       .forEach((player) => {
@@ -113,7 +117,7 @@ export class HomeComponent {
     }
   }
 
-  updatePlayersThatExploded() {
+  updatePlayersThatExploded(): void {
     this.checkIfSomeoneWonTheGame();
 
     this.players
@@ -122,13 +126,13 @@ export class HomeComponent {
       .forEach((player) => this.updateExplodedPlayerInfo(player));
   }
 
-  updatePlayersThatWereEliminated() {
+  updatePlayersThatWereEliminated(): void {
     this.players
       .filter((player) => !player.isPlaying)
       .forEach((player) => this.eliminatePlayer(player));
   }
 
-  checkIfSomeoneWonTheGame() {
+  checkIfSomeoneWonTheGame(): void {
     const playingPlayers = this.players
       .filter((player) => player.isPlaying)
       .filter((player) => !player.hasExploded);
@@ -137,21 +141,25 @@ export class HomeComponent {
       this.players
         .filter((player) => player.hasExploded)
         .forEach((player) => this.eliminatePlayer(player));
+      this.winner = playingPlayers[0].name;
+      setTimeout(() => {
+        this.modal.toggle();
+      }, 2000);
     }
   }
 
-  updateExplodedPlayerInfo(player: Player) {
+  updateExplodedPlayerInfo(player: Player): void {
     player.hasExplodedWith = player.total;
     player.total = this.getHighestValidTotal();
     player.isBackWith = player.total;
     this.updateScape(player);
   }
 
-  explodePlayer(player: Player) {
+  explodePlayer(player: Player): void {
     player.hasExploded = true;
   }
 
-  eliminatePlayer(player: Player) {
+  eliminatePlayer(player: Player): void {
     player.isPlaying = false;
     player.scape = '-';
   }
@@ -164,7 +172,7 @@ export class HomeComponent {
       }, 0);
   }
 
-  enableSubmitButton() {
+  enableSubmitButton(): void {
     this.canSubmit = this.players
       .filter((player) => player.isPlaying)
       .every((player) => {
