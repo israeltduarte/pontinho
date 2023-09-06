@@ -21,7 +21,16 @@ export class HomeComponent {
   }
 
   restartGame() {
-    console.log('restartGame');
+    this.players.forEach((player) => {
+      player.points = [];
+      player.total = 0;
+      player.scape = 99;
+      player.hasExploded = false;
+      player.isPlaying = true;
+    });
+    this.canSubmit = false;
+    this.score = new Map<string, number>();
+    this.highestTotal = 0;
   }
 
   submitScores() {
