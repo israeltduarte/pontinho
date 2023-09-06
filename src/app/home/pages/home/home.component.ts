@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { WinnerModalComponent } from 'src/app/components/winner-modal/winner-modal.component';
 import { Player } from 'src/app/core/models';
 import data from '../../../../api/data.json';
-import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-home',
