@@ -4,11 +4,11 @@ import { Player } from 'src/app/core/models';
 import data from '../../../../api/data.json';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'match',
+  templateUrl: './match.component.html',
+  styleUrls: ['./match.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class MatchComponent implements OnInit {
   players!: Player[];
   score!: Map<string, number>;
   canSubmit!: boolean;
