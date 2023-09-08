@@ -8,7 +8,7 @@
   </div>
   <input
     id="newplayer"
-    [(ngModel)]="newPlayer"
+    [(ngModel)]="newPlayerName"
     placeholder="Insira o nome do jogador"
     type="text"
   />
@@ -21,8 +21,7 @@
   <input
     [(ngModel)]="maxPoints"
     type="number"
-    placeholder="100"
-    (submit)="defineMax()"
+    placeholder="120"
     pattern="[0-9]*"
   />
 </div>
@@ -32,8 +31,7 @@
   <input
     [(ngModel)]="maxExplosions"
     type="number"
-    placeholder="1"
-    (submit)="defineExplosions()"
+    placeholder="2"
     pattern="[0-9]*"
   />
 </div>

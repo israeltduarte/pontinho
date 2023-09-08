@@ -51,6 +51,12 @@
             : 'infoEliminated'
         "
       >
+        <div
+          class="hearts"
+          *ngFor="let _ of generateHearts(player.explosionsLeft)"
+        >
+          ❤️
+        </div>
         <div>Total: {{ player.total }}</div>
         <div>Escape: {{ player.scape }}</div>
         <div *ngFor="let point of player.points">

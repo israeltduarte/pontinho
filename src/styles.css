@@ -19,11 +19,3 @@ a {
 .invoice {
   margin-bottom: 20px;
 }
-
-.top-line,
-.bottom-line {
-  background-color: #c72525;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  height: 40px;
-}

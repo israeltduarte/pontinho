@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WinnerModalComponent } from 'src/app/components/winner-modal/winner-modal.component';
 import { Player } from 'src/app/core/models';
+import { SharedService } from 'src/app/shared/shared.service';
 import data from '../../../../api/data.json';
 
 @Component({
@@ -17,11 +18,26 @@ export class MatchComponent implements OnInit {
   maxPoints: number = 99;
   @ViewChild('modal') modal!: WinnerModalComponent;
 
+  constructor(private sharedService: SharedService) {}
+
   ngOnInit(): void {
-    this.players = data.players;
     this.score = new Map<string, number>();
     this.canSubmit = false;
     this.highestTotal = 0;
+    this.sharedService.players$.subscribe((value) => {
+      this.players = value;
+    });
+    this.sharedService.maxPoints$.subscribe((value) => {
+      this.maxPoints = value - 1;
+    });
+    if ((this.players = [])) {
+      this.players = data.players;
+      this.restartGame();
+    }
+  }
+
+  generateHearts(explosionsLeft: number): number[] {
+    return Array.from({ length: explosionsLeft }, (_, index) => index);
   }
 
   restartGame(): void {
@@ -157,9 +173,7 @@ export class MatchComponent implements OnInit {
   }
 
   updateExplodedPlayerInfo(player: Player): void {
-    player.hasExplodedWith = player.total;
     player.total = this.getHighestValidTotal();
-    player.isBackWith = player.total;
     this.updateScape(player);
   }
 

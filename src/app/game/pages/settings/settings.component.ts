@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Player, newEmptyPlayer } from 'src/app/core/models';
+import { SharedService } from 'src/app/shared/shared.service';
 import data from '../../../../api/data.json';
 
 @Component({
@@ -8,24 +9,26 @@ import data from '../../../../api/data.json';
   styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-  players!: Player[];
-  @Input() newPlayer: string = '';
+  players: Player[] = [];
+  @Input() newPlayerName: string = '';
   @Input() maxPoints: number = 100;
   @Input() maxExplosions: number = 1;
+
+  constructor(private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.players = data.players;
   }
 
   addPlayer() {
-    var newPlayer = newEmptyPlayer();
-    newPlayer.name = this.newPlayer;
+    const newPlayer = newEmptyPlayer();
+    newPlayer.name = this.newPlayerName;
     this.players.push(newPlayer);
     this.clearNewPlayerField();
   }
 
   clearNewPlayerField() {
-    this.newPlayer = '';
+    this.newPlayerName = '';
   }
 
   removePlayer(player: Player) {
@@ -35,15 +38,27 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  defineMax() {
-    console.log('define new max');
+  updatePlayers(): void {
+    this.sharedService.setPlayers(this.players);
   }
 
-  defineExplosions() {
-    console.log('define max explosions');
+  updateMaxPoints(): void {
+    this.sharedService.setMaxPoints(this.maxPoints);
+  }
+
+  updateMaxExplosions(): void {
+    this.sharedService.setMaxExplosions(this.maxExplosions);
   }
 
   saveConfigs() {
-    console.log('save configurations');
+    let id = 1;
+    this.players.forEach((player) => {
+      player.id = 'player' + id++;
+      player.explosionsLeft = this.maxExplosions;
+      player.scape = this.maxPoints - 1;
+    });
+    this.updatePlayers();
+    this.updateMaxPoints();
+    this.updateMaxExplosions();
   }
 }
