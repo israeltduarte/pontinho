@@ -1,3 +1,20 @@
+<configs-modal #modal>
+  <div class="modal-content" [ngClass]="{ show: modal.showModal }">
+    <div class="modal-header">
+      <h2>Atenção:</h2>
+    </div>
+    <div class="modal-body">
+      <p>Configurações foram salvas!</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-primary" (click)="navigateToMatchPage()">
+        Ir para a partida
+      </button>
+      <button class="btn-secondary" (click)="modal.toggle()">Fechar</button>
+    </div>
+  </div>
+</configs-modal>
+
 <div class="settings-container">
   <h2>Configurações</h2>
 
@@ -16,16 +33,17 @@
         type="text"
         class="player-name-input"
       />
+      <button type="submit" (click)="addPlayer()" class="add-button">
+        Adicionar
+      </button>
     </div>
-    <button type="submit" (click)="addPlayer()" class="add-button">
-      Adicionar
-    </button>
   </div>
 
   <div class="points">
     <div class="points-header">Limite de Pontos</div>
     <input
       [(ngModel)]="maxPoints"
+      (blur)="updateMaxPoints()"
       type="number"
       placeholder="100"
       class="points-input"
@@ -36,6 +54,7 @@
     <div class="explosions-header">Limite de Estouros</div>
     <input
       [(ngModel)]="maxExplosions"
+      (blur)="updateMaxExplosions()"
       type="number"
       placeholder="1"
       class="explosions-input"
@@ -43,7 +62,11 @@
   </div>
 
   <div class="save-config">
-    <button type="submit" (click)="saveConfigs()" class="save-button">
+    <button
+      type="submit"
+      (click)="saveConfigs(); openModal()"
+      class="save-button"
+    >
       Salvar
     </button>
   </div>

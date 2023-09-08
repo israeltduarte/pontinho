@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'winner-modal',
   templateUrl: 'winner-modal.component.html',
   styleUrls: ['winner-modal.component.css'],
 })

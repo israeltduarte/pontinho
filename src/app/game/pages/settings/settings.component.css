@@ -49,8 +49,12 @@ h2 {
 .points-header,
 .explosions-header {
   font-size: 18px;
-  color: #1c3d6e;
-  margin-bottom: 10px;
+  color: white;
+  margin-bottom: 20px;
+  width: fit-content;
+  background-color: var(--titlePlaying);
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .player-items {
@@ -63,28 +67,34 @@ h2 {
   align-items: center;
   margin-bottom: 10px;
   margin-right: 10px;
+  border-radius: 5px;
   /* color: #1c3d6e; */
   color: white;
   padding: 5px;
   padding-left: 12px;
   float: left;
-  width: 160px;
-  background-color: var(--titlePlaying);
+  width: auto;
+  background-color: var(--infoPlaying);
 }
 
 .player-name-input,
 .points-input,
 .explosions-input {
-  width: 70%;
   height: 40px;
   border: 2px solid #ccc;
   border-radius: 5px;
   padding: 5px 10px;
   font-size: 16px;
+  margin-right: 10px;
+}
+
+.points-input,
+.explosions-input {
+  width: 100px;
 }
 
 .remove-button {
-  background-color: var(--titlePlaying) !important;
+  background-color: var(--infoPlaying) !important;
 }
 
 .remove-button,
@@ -100,6 +110,10 @@ h2 {
 
 .save-config {
   text-align: center;
+}
+
+.save-button {
+  padding: 10px 20px;
 }
 
 @media (max-width: 768px) {
@@ -119,10 +133,6 @@ h2 {
     background-color: var(--titlePlaying);
   }
 
-  .player-item {
-    display: inline;
-  }
-
   .player-input {
     display: flex;
   }
@@ -131,5 +141,68 @@ h2 {
   .points-input,
   .explosions-input {
     width: 100%;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-in-out;
+  opacity: 0;
+}
+
+.modal-content.show {
+  opacity: 1;
+}
+
+.modal-header {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+}
+
+.winner-name {
+  color: var(--restartButtonActive);
+  font-size: 32px;
+}
+
+.modal-body {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  justify-content: center !important;
+  display: contents;
+}
+
+.modal-footer button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #7db8a2;
+}
+
+.btn-secondary {
+  background-color: #d6496c;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
