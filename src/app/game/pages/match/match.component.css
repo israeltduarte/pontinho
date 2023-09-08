@@ -21,7 +21,6 @@
 .player-container {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -32,15 +31,16 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  width: 100%;
 }
 
 .playerCard {
-  flex: 0 1 calc(50% - 20px);
+  /* flex: 0 1 calc(50% - 20px); */
+  margin-top: 10px;
   text-align: center;
   padding: 15px;
   border-radius: 10px;
   background-color: var(--playerCard);
+  width: 200px;
 }
 
 .playerCard:hover {
@@ -136,6 +136,7 @@
 }
 
 .gameButtons {
+  padding: 0;
   margin-top: 12px;
 }
 
@@ -154,17 +155,22 @@
   .player-container {
     float: left;
     width: 428px;
-    padding: 15px 0px;
+    padding: 15px 10px;
   }
-
+  .playerCard {
+    flex: 0 1 calc(50% - 20px);
+    width: 50%;
+  }
   .playerTitle {
     font-size: 16px;
     padding: 10px;
   }
-
   .playerScore input {
     font-size: 14px;
     height: 40px;
+  }
+  .gameButtons {
+    width: 100%;
   }
 }
 

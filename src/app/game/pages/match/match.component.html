@@ -16,7 +16,7 @@
 </app-modal>
 
 <div class="player-container">
-  <div class="players row">
+  <div class="players">
     <div
       *ngFor="let player of players"
       class="playerCard"
@@ -51,12 +51,12 @@
             : 'infoEliminated'
         "
       >
-        <div *ngIf="!player.explosionsLeft">-</div>
+        <div *ngIf="!player.isPlaying">-</div>
         <div
           class="hearts"
-          *ngFor="let _ of generateHearts(player.explosionsLeft)"
+          *ngFor="let _ of generateHearts(player.explosionsLeft + 1)"
         >
-          {{ _ == 0 ? " " : " " }} ❤️
+          ❤️
         </div>
 
         <div>Total: {{ player.total }}</div>
@@ -78,15 +78,15 @@
         </div>
       </div>
     </div>
-    <div class="gameButtons">
-      <button
-        [ngClass]="canSubmit ? 'active' : 'inactive'"
-        (click)="submitScores()"
-        [disabled]="!canSubmit"
-      >
-        Finalizar rodada
-      </button>
-      <button class="restart" (click)="restartGame()">Novo Jogo</button>
-    </div>
+  </div>
+  <div class="gameButtons">
+    <button
+      [ngClass]="canSubmit ? 'active' : 'inactive'"
+      (click)="submitScores()"
+      [disabled]="!canSubmit"
+    >
+      Finalizar rodada
+    </button>
+    <button class="restart" (click)="restartGame()">Novo Jogo</button>
   </div>
 </div>

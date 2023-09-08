@@ -122,9 +122,10 @@ export class MatchComponent implements OnInit {
   updateTotal(player: Player) {
     player.total = player.total + Number(this.score.get(player.id));
     if (this.hasExploded(player)) {
-      if (player.explosionsLeft <= 0) {
+      if (player.explosionsLeft == 0) {
+        player.explosionsLeft = -1;
         this.eliminatePlayer(player);
-      } else if (player.explosionsLeft == 1) {
+      } else if (player.explosionsLeft >= 1) {
         this.explodePlayer(player);
       } else {
         this.decreaseLifes(player);
@@ -137,9 +138,7 @@ export class MatchComponent implements OnInit {
   }
 
   explodePlayer(player: Player): void {
-    if (player.explosionsLeft == 1) {
-      player.hasExploded = true;
-    }
+    player.hasExploded = true;
     this.decreaseLifes(player);
   }
 
