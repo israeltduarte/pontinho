@@ -1,5 +1,208 @@
-.players {}
+:host {
+  --titlePlaying: #009688;
+  --infoPlaying: #4db6ac;
+  --cardPlaying: #80cbc4;
 
-.points{}
+  --titleExploded: #917e2f;
+  --infoExploded: #bd9f2a;
+  --cardExploded: #f8e09c;
 
-.explosions{}
+  --titleEliminated: #f44336;
+  --infoEliminated: #e57373;
+  --cardEliminated: #ffa4a2;
+
+  --finishButton: #0d8bd9;
+  --finishButtonActive: #086096;
+  --finishButtonInactive: #8fcee7;
+  --restartButton: #ff0000;
+  --restartButtonActive: #bd0202;
+}
+
+.settings-container {
+  width: 1024px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #1c3d6e;
+  margin-bottom: 20px;
+}
+
+.players {
+  display: inline-block;
+  width: 100%;
+}
+
+.players,
+.points,
+.explosions {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #80cbc4;
+}
+
+.players-header,
+.points-header,
+.explosions-header {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 20px;
+  width: fit-content;
+  background-color: var(--titlePlaying);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.player-items {
+  display: inline-block;
+}
+
+.player-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  /* color: #1c3d6e; */
+  color: white;
+  padding: 5px;
+  padding-left: 12px;
+  float: left;
+  width: auto;
+  background-color: var(--infoPlaying);
+}
+
+.player-name-input,
+.points-input,
+.explosions-input {
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.points-input,
+.explosions-input {
+  width: 100px;
+}
+
+.remove-button {
+  background-color: var(--infoPlaying) !important;
+}
+
+.remove-button,
+.add-button,
+.save-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.save-config {
+  text-align: center;
+}
+
+.save-button {
+  padding: 10px 20px;
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    width: 428px;
+    float: left;
+  }
+
+  .players-header,
+  .points-header,
+  .explosions-header {
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: var(--titlePlaying);
+  }
+
+  .player-input {
+    display: flex;
+  }
+
+  .player-name-input,
+  .points-input,
+  .explosions-input {
+    width: 100%;
+  }
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-in-out;
+  opacity: 0;
+}
+
+.modal-content.show {
+  opacity: 1;
+}
+
+.modal-header {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+}
+
+.winner-name {
+  color: var(--restartButtonActive);
+  font-size: 32px;
+}
+
+.modal-body {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  justify-content: center !important;
+  display: contents;
+}
+
+.modal-footer button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #7db8a2;
+}
+
+.btn-secondary {
+  background-color: #d6496c;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

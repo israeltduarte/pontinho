@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ConfigsModalComponent } from 'src/app/components/configs-modal/configs-modal.component';
 import { Player, newEmptyPlayer } from 'src/app/core/models';
+import { SharedService } from 'src/app/shared/shared.service';
 import data from '../../../../api/data.json';
 
 @Component({
@@ -8,24 +11,41 @@ import data from '../../../../api/data.json';
   styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-  players!: Player[];
-  @Input() newPlayer: string = '';
+  players: Player[] = [];
+  @Input() newPlayerName: string = '';
   @Input() maxPoints: number = 100;
   @Input() maxExplosions: number = 1;
+  @ViewChild('modal') modal!: ConfigsModalComponent;
+
+  constructor(private sharedService: SharedService, private router: Router) {}
 
   ngOnInit(): void {
     this.players = data.players;
   }
 
+  openModal() {
+    setTimeout(() => {
+      this.modal.toggle();
+    }, 1000);
+  }
+
+  navigateToMatchPage(): void {
+    this.router.navigate(['/match']);
+  }
+
   addPlayer() {
-    var newPlayer = newEmptyPlayer();
-    newPlayer.name = this.newPlayer;
-    this.players.push(newPlayer);
-    this.clearNewPlayerField();
+    if (this.newPlayerName != null && this.newPlayerName.trim() != '') {
+      const newPlayer = newEmptyPlayer();
+      newPlayer.name = this.newPlayerName;
+      newPlayer.lifes = this.players[0].lifes;
+      newPlayer.scape = this.players[0].scape;
+      this.players.push(newPlayer);
+      this.clearNewPlayerField();
+    }
   }
 
   clearNewPlayerField() {
-    this.newPlayer = '';
+    this.newPlayerName = '';
   }
 
   removePlayer(player: Player) {
@@ -35,15 +55,35 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  defineMax() {
-    console.log('define new max');
+  updatePlayers(): void {
+    this.sharedService.setPlayers(this.players);
   }
 
-  defineExplosions() {
-    console.log('define max explosions');
+  updateMaxPoints(): void {
+    if (this.maxPoints != undefined && this.maxPoints != null) {
+      this.sharedService.setMaxPoints(this.maxPoints);
+    } else {
+      this.maxPoints = 100;
+    }
+  }
+
+  updateMaxExplosions(): void {
+    if (this.maxExplosions != undefined && this.maxExplosions != null) {
+      this.sharedService.setMaxExplosions(this.maxExplosions);
+    } else {
+      this.maxPoints = 100;
+    }
   }
 
   saveConfigs() {
-    console.log('save configurations');
+    let id = 1;
+    this.players.forEach((player) => {
+      player.id = 'player' + id++;
+      player.lifes = this.maxExplosions;
+      player.scape = this.maxPoints - 1;
+    });
+    this.updatePlayers();
+    this.updateMaxPoints();
+    this.updateMaxExplosions();
   }
 }

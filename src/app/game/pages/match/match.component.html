@@ -1,4 +1,4 @@
-<app-modal #modal>
+<winner-modal #modal>
   <div class="modal-content" [ngClass]="{ show: modal.showModal }">
     <div class="modal-header">
       <h2>Parabéns!</h2>
@@ -13,51 +13,59 @@
       <button class="btn-secondary" (click)="modal.toggle()">Fechar</button>
     </div>
   </div>
-</app-modal>
+</winner-modal>
 
-<div class="container">
-  <div class="players row">
+<div class="player-container">
+  <div class="players">
     <div
       *ngFor="let player of players"
-      class="playerCard"
+      class="player-card"
       [ngClass]="
         player.isPlaying
           ? player.hasExploded
-            ? 'cardExploded'
-            : 'cardPlaying'
-          : 'cardEliminated'
+            ? 'card-exploded'
+            : 'card-playing'
+          : 'card-eliminated'
       "
     >
       <div
-        class="playerTitle"
+        class="player-title"
         [ngClass]="
           player.isPlaying
             ? player.hasExploded
-              ? 'titleExploded'
-              : 'titlePlaying'
-            : 'titleEliminated'
+              ? 'title-exploded'
+              : 'title-playing'
+            : 'title-eliminated'
         "
       >
         {{ player.name }}
       </div>
 
       <div
-        class="playerInfo"
+        class="player-info"
         [ngClass]="
           player.isPlaying
             ? player.hasExploded
-              ? 'infoExploded'
-              : 'infoPlaying'
-            : 'infoEliminated'
+              ? 'info-exploded'
+              : 'info-playing'
+            : 'info-eliminated'
         "
       >
+        <div *ngIf="!player.isPlaying">-</div>
+        <div
+          class="hearts"
+          *ngFor="let _ of generateHearts(player.lifes + 1)"
+        >
+          ❤️
+        </div>
+
         <div>Total: {{ player.total }}</div>
         <div>Escape: {{ player.scape }}</div>
         <div *ngFor="let point of player.points">
           <div>{{ point }}</div>
         </div>
 
-        <div class="playerScore">
+        <div class="player-score">
           <input
             type="number"
             [id]="'score_' + player.id"
@@ -70,15 +78,15 @@
         </div>
       </div>
     </div>
-    <div class="gameButtons">
-      <button
-        [ngClass]="canSubmit ? 'active' : 'inactive'"
-        (click)="submitScores()"
-        [disabled]="!canSubmit"
-      >
-        Finalizar rodada
-      </button>
-      <button class="restart" (click)="restartGame()">Novo Jogo</button>
-    </div>
+  </div>
+  <div class="game-buttons">
+    <button
+      [ngClass]="canSubmit ? 'active' : 'inactive'"
+      (click)="submitScores()"
+      [disabled]="!canSubmit"
+    >
+      Finalizar rodada
+    </button>
+    <button class="restart" (click)="restartGame()">Novo Jogo</button>
   </div>
 </div>

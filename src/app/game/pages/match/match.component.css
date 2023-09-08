@@ -18,10 +18,9 @@
   --restartButtonActive: #bd0202;
 }
 
-.container {
+.player-container {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -32,39 +31,46 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  width: 100%;
 }
 
-.playerCard {
-  flex: 0 1 calc(50% - 20px);
+.player-card {
+  /* flex: 0 1 calc(50% - 20px); */
+  margin-top: 10px;
   text-align: center;
   padding: 15px;
   border-radius: 10px;
   background-color: var(--playerCard);
+  width: 200px;
 }
 
-.playerCard:hover {
+.player-card:hover {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   transform: scale(1.04);
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.playerTitle {
+.player-title {
   font-size: 18px;
   padding: 5px 10px;
   border-radius: 10px;
   background-color: var(--playerTitle);
   margin-bottom: 10px;
   color: white;
+  overflow: hidden;
 }
 
-.playerInfo {
+.player-info {
   padding: 10px;
   border-radius: 10px;
   color: white;
+  min-height: 142px;
 }
 
-.playerScore input {
+.hearts {
+  display: inline-block;
+}
+
+.player-score input {
   width: 100%;
   height: 50px;
   text-align: center;
@@ -76,42 +82,42 @@
   outline: none;
 }
 
-.playerScore input[type="number"]:focus {
+.player-score input[type="number"]:focus {
   border-color: gray;
 }
 
-.titlePlaying {
+.title-playing {
   background-color: var(--titlePlaying);
 }
-.titleExploded {
+.title-exploded {
   background-color: var(--titleExploded);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
-.titleEliminated {
+.title-eliminated {
   background-color: var(--titleEliminated);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
-.infoPlaying {
+.info-playing {
   background-color: var(--infoPlaying);
 }
-.infoExploded {
+.info-exploded {
   background-color: var(--infoExploded);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
-.infoEliminated {
+.info-eliminated {
   background-color: var(--infoEliminated);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
-.cardPlaying {
+.card-playing {
   background-color: var(--cardPlaying);
 }
-.cardExploded {
+.card-exploded {
   background-color: var(--cardExploded);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
-.cardEliminated {
+.card-eliminated {
   background-color: var(--cardEliminated);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
 
 .active {
@@ -130,11 +136,12 @@
   background-color: var(--restartButtonActive);
 }
 
-.gameButtons {
+.game-buttons {
+  padding: 0;
   margin-top: 12px;
 }
 
-.gameButtons button {
+.game-buttons button {
   margin-top: 5px;
   width: 100%;
   height: 40px;
@@ -146,20 +153,21 @@
 }
 
 @media (max-width: 768px) {
-  .container {
+  .player-container {
     float: left;
     width: 428px;
-    padding: 15px 0px;
+    padding: 15px 10px;
   }
-
-  .playerTitle {
-    font-size: 16px;
-    padding: 10px;
+  .player-card {
+    flex: 0 1 calc(50% - 20px);
+    width: auto;
   }
-
-  .playerScore input {
+  .player-score input {
     font-size: 14px;
     height: 40px;
+  }
+  .game-buttons {
+    width: 100%;
   }
 }
 

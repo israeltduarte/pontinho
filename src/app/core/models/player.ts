@@ -6,8 +6,7 @@ export class Player {
     public scape: any,
     public points: any[],
     public hasExploded: boolean,
-    public hasExplodedWith: number,
-    public isBackWith: number,
+    public lifes: number,
     public isPlaying: boolean
   ) {}
 }

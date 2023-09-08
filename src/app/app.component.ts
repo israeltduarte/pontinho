@@ -6,6 +6,6 @@ import * as data from '../api/data.json';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'myinvoice-app';
+  title = 'pontinho-app';
   header = data;
 }
