@@ -14,6 +14,7 @@ export class MatchComponent implements OnInit {
   canSubmit!: boolean;
   highestTotal!: number;
   winner!: String;
+  maxPoints: number = 99;
   @ViewChild('modal') modal!: WinnerModalComponent;
 
   ngOnInit(): void {
@@ -31,7 +32,7 @@ export class MatchComponent implements OnInit {
     this.players.forEach((player) => {
       player.points = [];
       player.total = 0;
-      player.scape = 99;
+      player.scape = this.maxPoints;
       player.hasExploded = false;
       player.isPlaying = true;
     });
@@ -98,16 +99,20 @@ export class MatchComponent implements OnInit {
 
   updateTotal(player: Player) {
     player.total = player.total + Number(this.score.get(player.id));
-    if (player.total > 99) {
+    if (this.hasExploded(player)) {
       !player.hasExploded
         ? this.explodePlayer(player)
         : this.eliminatePlayer(player);
     }
   }
 
+  hasExploded(player: Player) {
+    return player.total > this.maxPoints;
+  }
+
   updateScape(player: Player) {
     if (player.isPlaying) {
-      player.scape = 99 - player.total;
+      player.scape = this.maxPoints - player.total;
     }
   }
 
@@ -125,7 +130,7 @@ export class MatchComponent implements OnInit {
 
     this.players
       .filter((player) => player.isPlaying)
-      .filter((player) => player.total > 99)
+      .filter((player) => this.hasExploded(player))
       .forEach((player) => this.updateExplodedPlayerInfo(player));
   }
 
@@ -169,7 +174,7 @@ export class MatchComponent implements OnInit {
 
   getHighestValidTotal(): number {
     return this.players
-      .filter((player) => player.total <= 99)
+      .filter((player) => player.total <= this.maxPoints)
       .reduce((highestTotal: number, currentPlayer: Player) => {
         return Math.max(highestTotal, currentPlayer.total);
       }, 0);

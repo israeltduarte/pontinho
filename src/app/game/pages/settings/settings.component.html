@@ -19,6 +19,7 @@
 <div class="points">
   <div>Limite de Pontos</div>
   <input
+    [(ngModel)]="maxPoints"
     type="number"
     placeholder="100"
     (submit)="defineMax()"
@@ -29,6 +30,7 @@
 <div class="explosions">
   <div>Limite de Estouros</div>
   <input
+    [(ngModel)]="maxExplosions"
     type="number"
     placeholder="1"
     (submit)="defineExplosions()"
@@ -37,5 +39,5 @@
 </div>
 
 <div class="save-config">
-    <button type="submit" (click)="saveConfigs()">Salvar</button>
+  <button type="submit" (click)="saveConfigs()">Salvar</button>
 </div>

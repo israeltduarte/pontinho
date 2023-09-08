@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Player, newEmptyPlayer } from 'src/app/core/models';
 import data from '../../../../api/data.json';
 
@@ -9,9 +9,9 @@ import data from '../../../../api/data.json';
 })
 export class SettingsComponent implements OnInit {
   players!: Player[];
-  newPlayer: string = '';
-  points: number = 100;
-  explosions: number = 1;
+  @Input() newPlayer: string = '';
+  @Input() maxPoints: number = 100;
+  @Input() maxExplosions: number = 1;
 
   ngOnInit(): void {
     this.players = data.players;
