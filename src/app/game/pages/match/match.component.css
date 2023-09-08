@@ -161,10 +161,6 @@
     flex: 0 1 calc(50% - 20px);
     width: 50%;
   }
-  .playerTitle {
-    font-size: 16px;
-    padding: 10px;
-  }
   .playerScore input {
     font-size: 14px;
     height: 40px;

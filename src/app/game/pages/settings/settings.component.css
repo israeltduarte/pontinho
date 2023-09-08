@@ -19,7 +19,7 @@
 }
 
 .settings-container {
-  max-width: 1024px;
+  width: 1024px;
   margin: 0 auto;
   padding: 15px;
 }
@@ -28,6 +28,11 @@ h2 {
   font-size: 24px;
   color: #1c3d6e;
   margin-bottom: 20px;
+}
+
+.players {
+  display: inline-block;
+  width: 100%;
 }
 
 .players,
@@ -48,12 +53,23 @@ h2 {
   margin-bottom: 10px;
 }
 
+.player-items {
+  display: inline-block;
+}
+
 .player-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  color: #1c3d6e;
+  margin-right: 10px;
+  /* color: #1c3d6e; */
+  color: white;
+  padding: 5px;
+  padding-left: 12px;
+  float: left;
+  width: 160px;
+  background-color: var(--titlePlaying);
 }
 
 .player-name-input,
@@ -67,6 +83,10 @@ h2 {
   font-size: 16px;
 }
 
+.remove-button {
+  background-color: var(--titlePlaying) !important;
+}
+
 .remove-button,
 .add-button,
 .save-button {
@@ -78,10 +98,33 @@ h2 {
   cursor: pointer;
 }
 
+.save-config {
+  text-align: center;
+}
+
 @media (max-width: 768px) {
+  .settings-container {
+    width: 428px;
+    float: left;
+  }
+
+  .players-header,
+  .points-header,
+  .explosions-header {
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: var(--titlePlaying);
+  }
+
   .player-item {
-    flex-direction: column;
-    align-items: flex-start;
+    display: inline;
+  }
+
+  .player-input {
+    display: flex;
   }
 
   .player-name-input,

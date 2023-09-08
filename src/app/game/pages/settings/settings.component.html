@@ -3,11 +3,11 @@
 
   <div class="players">
     <div class="players-header">Jogadores</div>
-    <div *ngFor="let player of players" class="player-item">
-      <span>{{ player.name }}</span>
-      <button (click)="removePlayer(player)" class="remove-button">
-        Remover
-      </button>
+    <div class="player-items">
+      <div *ngFor="let player of players" class="player-item">
+        <span>{{ player.name }}</span>
+        <button (click)="removePlayer(player)" class="remove-button">x</button>
+      </div>
     </div>
     <div class="player-input">
       <input
@@ -16,10 +16,10 @@
         type="text"
         class="player-name-input"
       />
-      <button type="submit" (click)="addPlayer()" class="add-button">
-        Adicionar
-      </button>
     </div>
+    <button type="submit" (click)="addPlayer()" class="add-button">
+      Adicionar
+    </button>
   </div>
 
   <div class="points">
