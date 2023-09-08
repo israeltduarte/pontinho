@@ -16,6 +16,7 @@ export class MatchComponent implements OnInit {
   highestTotal!: number;
   winner!: String;
   maxPoints: number = 99;
+  maxExplosions: number = 1;
   @ViewChild('modal') modal!: WinnerModalComponent;
 
   constructor(private sharedService: SharedService) {}
@@ -30,6 +31,10 @@ export class MatchComponent implements OnInit {
     this.sharedService.maxPoints$.subscribe((value) => {
       this.maxPoints = value - 1;
     });
+    this.sharedService.maxExplosions$.subscribe((value) => {
+      this.maxExplosions = value;
+    });
+
     if ((this.players = [])) {
       this.players = data.players;
       this.restartGame();
@@ -51,6 +56,7 @@ export class MatchComponent implements OnInit {
       player.scape = this.maxPoints;
       player.hasExploded = false;
       player.isPlaying = true;
+      player.explosionsLeft = this.maxExplosions;
     });
     this.canSubmit = false;
     this.score.clear();
@@ -116,10 +122,30 @@ export class MatchComponent implements OnInit {
   updateTotal(player: Player) {
     player.total = player.total + Number(this.score.get(player.id));
     if (this.hasExploded(player)) {
-      !player.hasExploded
-        ? this.explodePlayer(player)
-        : this.eliminatePlayer(player);
+      if (player.explosionsLeft <= 0) {
+        this.eliminatePlayer(player);
+      } else if (player.explosionsLeft == 1) {
+        this.explodePlayer(player);
+      } else {
+        this.decreaseLifes(player);
+      }
     }
+  }
+
+  decreaseLifes(player: Player): void {
+    player.explosionsLeft = player.explosionsLeft - 1;
+  }
+
+  explodePlayer(player: Player): void {
+    if (player.explosionsLeft == 1) {
+      player.hasExploded = true;
+    }
+    this.decreaseLifes(player);
+  }
+
+  eliminatePlayer(player: Player): void {
+    player.isPlaying = false;
+    player.scape = '-';
   }
 
   hasExploded(player: Player) {
@@ -159,31 +185,29 @@ export class MatchComponent implements OnInit {
   checkIfSomeoneWonTheGame(): void {
     const playingPlayers = this.players
       .filter((player) => player.isPlaying)
-      .filter((player) => !player.hasExploded);
+      .filter((player) => !this.hasExploded(player));
 
     if (playingPlayers.length === 1) {
       this.players
-        .filter((player) => player.hasExploded)
-        .forEach((player) => this.eliminatePlayer(player));
+        .filter((player) => this.hasExploded(player))
+        .forEach((player) => {
+          this.eliminatePlayer(player);
+        });
       this.winner = playingPlayers[0].name;
-      setTimeout(() => {
-        this.modal.toggle();
-      }, 2000);
+
+      this.openModal();
     }
+  }
+
+  openModal() {
+    setTimeout(() => {
+      this.modal.toggle();
+    }, 1500);
   }
 
   updateExplodedPlayerInfo(player: Player): void {
     player.total = this.getHighestValidTotal();
     this.updateScape(player);
-  }
-
-  explodePlayer(player: Player): void {
-    player.hasExploded = true;
-  }
-
-  eliminatePlayer(player: Player): void {
-    player.isPlaying = false;
-    player.scape = '-';
   }
 
   getHighestValidTotal(): number {

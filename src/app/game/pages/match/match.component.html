@@ -15,7 +15,7 @@
   </div>
 </app-modal>
 
-<div class="container">
+<div class="player-container">
   <div class="players row">
     <div
       *ngFor="let player of players"
@@ -51,12 +51,14 @@
             : 'infoEliminated'
         "
       >
+        <div *ngIf="!player.explosionsLeft">-</div>
         <div
           class="hearts"
           *ngFor="let _ of generateHearts(player.explosionsLeft)"
         >
-          ❤️
+          {{ _ == 0 ? " " : " " }} ❤️
         </div>
+
         <div>Total: {{ player.total }}</div>
         <div>Escape: {{ player.scape }}</div>
         <div *ngFor="let point of player.points">

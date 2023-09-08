@@ -1,41 +1,50 @@
-<h2>Configurações</h2>
+<div class="settings-container">
+  <h2>Configurações</h2>
 
-<div class="players">
-  <div>Definir os Jogadores</div>
-  <div *ngFor="let player of players">
-    {{ player.name }}
-    <button (click)="removePlayer(player)">Remover</button>
+  <div class="players">
+    <div class="players-header">Jogadores</div>
+    <div *ngFor="let player of players" class="player-item">
+      <span>{{ player.name }}</span>
+      <button (click)="removePlayer(player)" class="remove-button">
+        Remover
+      </button>
+    </div>
+    <div class="player-input">
+      <input
+        [(ngModel)]="newPlayerName"
+        placeholder="Insira o nome do jogador"
+        type="text"
+        class="player-name-input"
+      />
+      <button type="submit" (click)="addPlayer()" class="add-button">
+        Adicionar
+      </button>
+    </div>
   </div>
-  <input
-    id="newplayer"
-    [(ngModel)]="newPlayerName"
-    placeholder="Insira o nome do jogador"
-    type="text"
-  />
 
-  <button type="submit" (click)="addPlayer()">Adicionar</button>
-</div>
+  <div class="points">
+    <div class="points-header">Limite de Pontos</div>
+    <input
+      [(ngModel)]="maxPoints"
+      type="number"
+      placeholder="100"
+      class="points-input"
+    />
+  </div>
 
-<div class="points">
-  <div>Limite de Pontos</div>
-  <input
-    [(ngModel)]="maxPoints"
-    type="number"
-    placeholder="120"
-    pattern="[0-9]*"
-  />
-</div>
+  <div class="explosions">
+    <div class="explosions-header">Limite de Estouros</div>
+    <input
+      [(ngModel)]="maxExplosions"
+      type="number"
+      placeholder="1"
+      class="explosions-input"
+    />
+  </div>
 
-<div class="explosions">
-  <div>Limite de Estouros</div>
-  <input
-    [(ngModel)]="maxExplosions"
-    type="number"
-    placeholder="2"
-    pattern="[0-9]*"
-  />
-</div>
-
-<div class="save-config">
-  <button type="submit" (click)="saveConfigs()">Salvar</button>
+  <div class="save-config">
+    <button type="submit" (click)="saveConfigs()" class="save-button">
+      Salvar
+    </button>
+  </div>
 </div>

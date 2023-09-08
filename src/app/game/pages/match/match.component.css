@@ -18,7 +18,7 @@
   --restartButtonActive: #bd0202;
 }
 
-.container {
+.player-container {
   max-width: 1024px;
   margin: 0 auto;
   padding: 15px;
@@ -62,6 +62,7 @@
   padding: 10px;
   border-radius: 10px;
   color: white;
+  min-height: 142px;
 }
 
 .hearts {
@@ -89,33 +90,33 @@
 }
 .titleExploded {
   background-color: var(--titleExploded);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
 .titleEliminated {
   background-color: var(--titleEliminated);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
 .infoPlaying {
   background-color: var(--infoPlaying);
 }
 .infoExploded {
   background-color: var(--infoExploded);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
 .infoEliminated {
   background-color: var(--infoEliminated);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
 .cardPlaying {
   background-color: var(--cardPlaying);
 }
 .cardExploded {
   background-color: var(--cardExploded);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
 .cardEliminated {
   background-color: var(--cardEliminated);
-  transition: transform 2s, background-color 2s;
+  transition: transform 1.5s, background-color 1.5s;
 }
 
 .active {
@@ -150,7 +151,7 @@
 }
 
 @media (max-width: 768px) {
-  .container {
+  .player-container {
     float: left;
     width: 428px;
     padding: 15px 0px;

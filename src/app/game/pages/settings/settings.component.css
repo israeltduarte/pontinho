@@ -1,5 +1,93 @@
-.players {}
+:host {
+  --titlePlaying: #009688;
+  --infoPlaying: #4db6ac;
+  --cardPlaying: #80cbc4;
 
-.points{}
+  --titleExploded: #917e2f;
+  --infoExploded: #bd9f2a;
+  --cardExploded: #f8e09c;
 
-.explosions{}
+  --titleEliminated: #f44336;
+  --infoEliminated: #e57373;
+  --cardEliminated: #ffa4a2;
+
+  --finishButton: #0d8bd9;
+  --finishButtonActive: #086096;
+  --finishButtonInactive: #8fcee7;
+  --restartButton: #ff0000;
+  --restartButtonActive: #bd0202;
+}
+
+.settings-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #1c3d6e;
+  margin-bottom: 20px;
+}
+
+.players,
+.points,
+.explosions {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #80cbc4; /* Light blue background */
+}
+
+.players-header,
+.points-header,
+.explosions-header {
+  font-size: 18px;
+  color: #1c3d6e; /* Dark blue header text */
+  margin-bottom: 10px;
+}
+
+.player-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #1c3d6e; /* Dark blue text */
+}
+
+.player-name-input,
+.points-input,
+.explosions-input {
+  width: 70%;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.remove-button,
+.add-button,
+.save-button {
+  background-color: #4a90e2; /* Blue buttons */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .player-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .player-name-input,
+  .points-input,
+  .explosions-input {
+    width: 100%;
+  }
+}
