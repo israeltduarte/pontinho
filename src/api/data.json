@@ -44,5 +44,10 @@
       "isBackWith": 0,
       "isPlaying": true
     }
-  ]
+  ],
+  "settings": {
+    "id": "1",
+    "maxPoints": 99,
+    "maxExplosions": 1
+  }
 }
