@@ -1,1 +1,41 @@
-<h1>Welcome to Settings!</h1>
+<h2>Configurações</h2>
+
+<div class="players">
+  <div>Definir os Jogadores</div>
+  <div *ngFor="let player of players">
+    {{ player.name }}
+    <button (click)="removePlayer(player)">Remover</button>
+  </div>
+  <input
+    id="newplayer"
+    [(ngModel)]="newPlayer"
+    placeholder="Insira o nome do jogador"
+    type="text"
+  />
+
+  <button type="submit" (click)="addPlayer()">Adicionar</button>
+</div>
+
+<div class="points">
+  <div>Limite de Pontos</div>
+  <input
+    type="number"
+    placeholder="100"
+    (submit)="defineMax()"
+    pattern="[0-9]*"
+  />
+</div>
+
+<div class="explosions">
+  <div>Limite de Estouros</div>
+  <input
+    type="number"
+    placeholder="1"
+    (submit)="defineExplosions()"
+    pattern="[0-9]*"
+  />
+</div>
+
+<div class="save-config">
+    <button type="submit" (click)="saveConfigs()">Salvar</button>
+</div>
