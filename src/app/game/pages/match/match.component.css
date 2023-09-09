@@ -43,6 +43,12 @@
   width: 200px;
 }
 
+.player-card:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transform: scale(1.04);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
 .player-title {
   font-size: 18px;
   padding: 5px 10px;
@@ -76,6 +82,10 @@
 }
 
 .player-score input[type="number"]:focus {
+  border-color: gray;
+}
+.player-score input[type="number"]:focus {
+  font-size: 16px;
   border-color: gray;
 }
 
@@ -148,18 +158,25 @@
 }
 
 @media (max-width: 768px) {
+  .player-container {
+    float: left;
+    width: 428px;
+    padding: 0;
+  }
   .player-card {
     flex: 0 1 calc(50% - 20px);
     width: auto;
   }
   .player-score input {
-    font-size: 16px !important;
+    font-size: 16px;
     height: 40px;
   }
-  .player-score input:focus {
-    font-size: 16px !important;
+  .player-score input:focus,
+  .player-score input:focus-visible,
+  .player-score input:focus-within {
+    font-size: 16px;
+    height: 40px;
   }
-
   .game-buttons {
     display: flex;
     flex-direction: column;
