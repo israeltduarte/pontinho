@@ -125,9 +125,9 @@ export class MatchComponent implements OnInit {
       if (player.lifes == 0) {
         player.lifes = -1;
         this.eliminatePlayer(player);
-      } else if (player.lifes >= 1) {
+      } else if (player.lifes == 1) {
         this.explodePlayer(player);
-      } else {
+      } else if (player.lifes > 1) {
         this.decreaseLifes(player);
       }
     }
