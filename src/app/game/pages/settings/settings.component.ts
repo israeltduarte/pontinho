@@ -37,8 +37,13 @@ export class SettingsComponent implements OnInit {
     if (this.newPlayerName != null && this.newPlayerName.trim() != '') {
       const newPlayer = newEmptyPlayer();
       newPlayer.name = this.newPlayerName;
-      newPlayer.lifes = this.players[0].lifes;
-      newPlayer.scape = this.players[0].scape;
+      if (this.players[0] != null && this.players[0] != undefined) {
+        newPlayer.lifes = this.players[0].lifes;
+        newPlayer.scape = this.players[0].scape;
+      } else {
+        newPlayer.lifes = 2;
+        newPlayer.scape = 100;
+      }
       this.players.push(newPlayer);
       this.clearNewPlayerField();
     }

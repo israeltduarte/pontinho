@@ -110,6 +110,8 @@ h2 {
 
 .save-config {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .save-button {
