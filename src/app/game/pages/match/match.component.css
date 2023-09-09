@@ -43,12 +43,6 @@
   width: 200px;
 }
 
-.player-card:hover {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  transform: scale(1.04);
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
 .player-title {
   font-size: 18px;
   padding: 5px 10px;
@@ -153,7 +147,7 @@
   border: none;
 }
 
-@supports (-webkit-overflow-scrolling: touch) {
+@media screen and (max-width: 768px) and (-webkit-overflow-scrolling: touch) {
   .player-card {
     flex: 0 1 calc(50% - 20px);
     width: auto;
