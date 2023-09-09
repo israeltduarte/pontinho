@@ -153,12 +153,7 @@
   border: none;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  .player-container {
-    float: left;
-    width: 428px;
-    padding: 0;
-  }
+@supports (-webkit-overflow-scrolling: touch) {
   .player-card {
     flex: 0 1 calc(50% - 20px);
     width: auto;
