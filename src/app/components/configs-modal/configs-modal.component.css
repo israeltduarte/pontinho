@@ -24,10 +24,3 @@
   width: 100vw;
   z-index: 10;
 }
-
-@media (max-width: 768px) {
-  .modal {
-    /* left: 21%;
-    top: 21%; */
-  }
-}

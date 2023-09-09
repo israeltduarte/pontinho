@@ -56,7 +56,6 @@
   background-color: var(--playerTitle);
   margin-bottom: 10px;
   color: white;
-  overflow: hidden;
 }
 
 .player-info {
