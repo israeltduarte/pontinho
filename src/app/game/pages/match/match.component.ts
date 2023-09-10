@@ -92,6 +92,13 @@ export class MatchComponent implements OnInit {
     return inputElement ? inputElement.value : '';
   }
 
+  setInputValue(playerId: string, value: number) {
+    const inputElement: HTMLInputElement | null = document.getElementById(
+      'score_' + playerId
+    ) as HTMLInputElement;
+    inputElement.value = value + '';
+  }
+
   updatePlayers(): void {
     this.players
       .filter((player) => player.isPlaying)
@@ -218,6 +225,35 @@ export class MatchComponent implements OnInit {
   }
 
   enableSubmitButton(): void {
+    let i = 0;
+    let j = 0;
+
+    this.players
+      .filter((player) => player.isPlaying)
+      .forEach((player) => {
+        const inputValue = this.getInputValue(player.id);
+        if (parseInt(inputValue) > 0) {
+          i++;
+        }
+      });
+
+    this.players
+      .filter((player) => player.isPlaying)
+      .forEach((player) => {
+        const inputValue = this.getInputValue(player.id);
+        if (inputValue == '' || inputValue == null || inputValue == undefined) {
+          j++;
+        }
+      });
+
+    if (i == 3 && j == 1) {
+      this.players
+        .filter((player) => player.isPlaying)
+        .forEach((player) => {
+          this.setInputValue(player.id, 0);
+        });
+    }
+
     this.canSubmit = this.players
       .filter((player) => player.isPlaying)
       .every((player) => {
