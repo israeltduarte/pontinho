@@ -226,8 +226,6 @@ export class MatchComponent implements OnInit {
 
   enableSubmitButton(): void {
     let i = 0;
-    let j = 0;
-
     this.players
       .filter((player) => player.isPlaying)
       .forEach((player) => {
@@ -237,6 +235,7 @@ export class MatchComponent implements OnInit {
         }
       });
 
+    let j = 0;
     this.players
       .filter((player) => player.isPlaying)
       .forEach((player) => {
@@ -246,7 +245,7 @@ export class MatchComponent implements OnInit {
         }
       });
 
-    if (i == 3 && j == 1) {
+    if (i == this.players.length - 1 && j == 1) {
       this.players
         .filter((player) => player.isPlaying)
         .forEach((player) => {
