@@ -51,13 +51,15 @@
             : 'info-eliminated'
         "
       >
-        <div *ngIf="!player.isPlaying">-</div>
-        <div
-          class="hearts"
-          *ngFor="let _ of generateHearts(player.lifes + 1)"
-        >
-          ❤️
+        <div *ngIf="player.isPlaying; else lifeDash">
+          <div
+            class="hearts"
+            *ngFor="let _ of generateHearts(player.lifes + 1)"
+          >
+            ❤️
+          </div>
         </div>
+        <ng-template #lifeDash>-</ng-template>
 
         <div>Total: {{ player.total }}</div>
         <div>Escape: {{ player.scape }}</div>

@@ -225,32 +225,20 @@ export class MatchComponent implements OnInit {
   }
 
   enableSubmitButton(): void {
-    let i = 0;
-    this.players
+    let validPlayersInput = this.players
       .filter((player) => player.isPlaying)
-      .forEach((player) => {
-        const inputValue = this.getInputValue(player.id);
-        if (parseInt(inputValue) > 0) {
-          i++;
-        }
-      });
+      .filter((player) => parseInt(this.getInputValue(player.id)) > 0);
 
-    let j = 0;
-    this.players
+    let invalidPlayersInput = this.players
       .filter((player) => player.isPlaying)
-      .forEach((player) => {
-        const inputValue = this.getInputValue(player.id);
-        if (inputValue == '' || inputValue == null || inputValue == undefined) {
-          j++;
-        }
-      });
+      .filter((player) => this.getInputValue(player.id) == '');
 
-    if (i == this.players.length - 1 && j == 1) {
-      this.players
-        .filter((player) => player.isPlaying)
-        .forEach((player) => {
-          this.setInputValue(player.id, 0);
-        });
+    if (
+      validPlayersInput.length ==
+        this.players.filter((player) => player.isPlaying).length - 1 &&
+      invalidPlayersInput.length == 1
+    ) {
+      this.setInputValue(invalidPlayersInput[0].id, 0);
     }
 
     this.canSubmit = this.players
